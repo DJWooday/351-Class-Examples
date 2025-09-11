@@ -1,9 +1,34 @@
 #include <iostream>
 using namespace std;
 
+#define ROWS 3
+#define COLS 4
+
 int main() {
     char move;
+    char grid[ROWS * COLS];
+
+    int playerPos = 1 * COLS + 2;
+    for (int i = 0; i < ROWS * COLS; i++) {
+        grid[i] = '0';
+    }
+    grid[playerPos] = 'X';
     do {
+
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                cout << grid[COLS * i + j] << " ";
+            }
+            cout << endl;
+        }
+
+        /*
+        for (int i = 0; i < ROWS * COLS; i++) {
+            if (i % COLS == 0) cout << "\n";
+            cout << grid[i] << " ";
+        }
+        */
+        //region Input
         cout << "Enter input (wasd or jilk)\n->";
         string buffer;
         getline(cin, buffer);
@@ -18,18 +43,26 @@ int main() {
             //}
             // Check input
         }
+        //endregion
+
         move = input[0];
 
         // React to input
         switch (move) {
             case 'w':
-                cout << "Up";
+                grid[playerPos] = '0';
+                playerPos -= COLS;
+                grid[playerPos] = 'X';
                 break;
             case 's':
-                cout << "Down";
+                grid[playerPos] = '0';
+                playerPos += COLS;
+                grid[playerPos] = 'X';
                 break;
             case 'a':
-                cout << "Left";
+                grid[playerPos] = '0';
+                playerPos -= 1;
+                grid[playerPos] = 'X';
                 break;
             case 'd':
                 cout << "Right";
@@ -38,6 +71,9 @@ int main() {
                 cout << "Invalid input";
                 break;
 
+
         }
+
+
     } while (move != 'q');
 }
