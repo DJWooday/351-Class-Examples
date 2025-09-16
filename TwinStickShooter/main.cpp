@@ -4,6 +4,15 @@ using namespace std;
 #define ROWS 3
 #define COLS 4
 
+void printGrid(char grid[]) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            cout << grid[COLS * i + j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 int main() {
     char move;
     char grid[ROWS * COLS];
@@ -15,12 +24,7 @@ int main() {
     grid[playerPos] = 'X';
     do {
 
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-                cout << grid[COLS * i + j] << " ";
-            }
-            cout << endl;
-        }
+        printGrid(grid);
 
         /*
         for (int i = 0; i < ROWS * COLS; i++) {
