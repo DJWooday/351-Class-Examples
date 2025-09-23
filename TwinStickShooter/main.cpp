@@ -1,30 +1,29 @@
 #include <iostream>
 using namespace std;
 
-#define ROWS 3
-#define COLS 4
-
-void printGrid(char grid[]) {
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            cout << grid[COLS * i + j] << " ";
+void printGrid(char grid[], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << grid[cols * i + j] << " ";
         }
         cout << endl;
     }
+    grid[0] = '1';
 }
 
 int main() {
     char move;
-    char grid[ROWS * COLS];
+    int rows = 3, cols = 4;
+    char grid[rows * cols];
 
-    int playerPos = 1 * COLS + 2;
-    for (int i = 0; i < ROWS * COLS; i++) {
+    int playerPos = 1 * cols + 2;
+    for (int i = 0; i < rows * cols; i++) {
         grid[i] = '0';
     }
     grid[playerPos] = 'X';
     do {
 
-        printGrid(grid);
+        printGrid(grid, rows, cols);
 
         /*
         for (int i = 0; i < ROWS * COLS; i++) {
@@ -55,12 +54,12 @@ int main() {
         switch (move) {
             case 'w':
                 grid[playerPos] = '0';
-                playerPos -= COLS;
+                playerPos -= cols;
                 grid[playerPos] = 'X';
                 break;
             case 's':
                 grid[playerPos] = '0';
-                playerPos += COLS;
+                playerPos += cols;
                 grid[playerPos] = 'X';
                 break;
             case 'a':

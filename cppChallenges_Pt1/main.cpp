@@ -30,6 +30,7 @@ int main() {
     const float schmearedBagel = 5.50;
     const float taxRate = 0.045;
 
+
     /* Answer
     string temp;
     stringstream ss;
