@@ -1,13 +1,19 @@
 #include <iostream>
 using namespace std;
 
+typedef int boolean;
+int x = 3;
+
+enum Days {MON, TUE};
+
 void smoothImage(int *&image) {
-    int nPixels[5];
+    int *nPixels = new int[5];
     for (int i = 0; i < 5; i++) {
         if (i == 0) nPixels[i] = (image[0] + image[1]) / 2;
         else if (i == 4) nPixels[i] = (image[4] + image[3]) / 2;
         else nPixels[i] = (image[i] + image[i+1] +image[i-1]) / 3;
     }
+    delete[] image;
     image = nPixels;
 }
 
@@ -37,9 +43,18 @@ int main() {
     image = nPixels;
     cout << image[0] << endl;
     */
-    int oPixels[] = {200, 255, 136, 245, 213};
+    int *oPixels = new int[5] {200, 255, 136, 245, 213};
     int *image = oPixels;
     cout << image[0] << endl;
     smoothImage(image);
-    cout << image[0] << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << image[i] << endl;
+    }
+
+    cout << image << endl;
+    cout << &image << endl;
+
+    boolean b = true;
+
+    Days d1 = MON;
 }
