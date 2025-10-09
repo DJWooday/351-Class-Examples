@@ -3,4 +3,8 @@ project(customdata)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(customdata main.cpp)
+add_executable(customdata main.cpp
+        Circle.cpp
+        Circle.h
+        Cube.cpp
+        Cube.h)

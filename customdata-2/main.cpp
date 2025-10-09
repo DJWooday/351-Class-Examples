@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Circle.h"
+#include "Cube.h"
 using namespace std;
 
 enum Day {Mon=10, Tue=20, Wed=30, Thu, Fri, Blo=15};
@@ -26,7 +28,14 @@ union weight {
     long ounces;
 };
 
+
 int main() {
+    Rectangle rect{6, 7};
+    Rectangle* rectptr;
+    cout << rect.get_area() << endl;
+
+    //int i = 0;
+
     Day currentDay = Tue;
     currentDay = (Day)(currentDay + 1);
     cout << "Happy " << currentDay << endl;

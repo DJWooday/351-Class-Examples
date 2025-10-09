@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Circle.h"
 using namespace std;
 
 enum Days {Mon, Tue, Wed, Thu, Fri};
@@ -26,7 +27,16 @@ struct {
     int year;
 } TurnDownForWhat;
 
+
+
+
+
 int main() {
+    int x(6);
+    Circle circ;
+    Rectangle rect{6, 7};
+    cout << rect.height << endl;
+
     movie EEAAO;
     EEAAO.wonOscar = true;
     EEAAO.title = "Everything Everywhere...";
