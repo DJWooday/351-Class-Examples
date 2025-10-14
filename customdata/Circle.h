@@ -22,6 +22,9 @@ class Sphere {
 
     Sphere(double radius, Circle *circle);
     ~Sphere();
+    Sphere(const Sphere& sphere);
+
+    Sphere& operator=(const Sphere& rhs);
 };
 
 #endif //CUSTOMDATA_CIRCLE_H

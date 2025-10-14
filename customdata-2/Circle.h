@@ -19,6 +19,22 @@ class Sphere {
     double radius;
     Circle *circle;
     ~Sphere();
+    Sphere() {
+        radius = 0;
+        circle = new Circle(radius);
+    }
+    Sphere(double radius) : radius(radius), circle(new Circle(radius)) {}
+    Sphere(const Sphere& s) {
+        radius = s.radius;
+        circle = new Circle(s.circle->radius);
+    }
+
+    Sphere& operator=(const Sphere& rhs) {
+        delete circle;
+        radius = rhs.radius;
+        circle = new Circle(rhs.circle->radius);
+        return *this;
+    }
 };
 inline Sphere::~Sphere() {
     delete circle;

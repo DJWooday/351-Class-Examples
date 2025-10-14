@@ -20,5 +20,17 @@ Sphere::~Sphere() {
     delete circle;
 }
 
+Sphere::Sphere(const Sphere &sphere) {
+    this->radius = sphere.radius;
+    this->circle = new Circle(sphere.circle->radius);
+}
+
+Sphere &Sphere::operator=(const Sphere &rhs) {
+    delete this->circle;
+    this->radius = rhs.radius;
+    Circle* c = new Circle(rhs.circle->radius);
+    this->circle = c;
+}
+
 
 

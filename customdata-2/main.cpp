@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Circle.h"
 #include "Cube.h"
+#include <fstream>
 using namespace std;
 
 enum Day {Mon=10, Tue=20, Wed=30, Thu, Fri, Blo=15};
@@ -28,8 +29,33 @@ union weight {
     long ounces;
 };
 
+class Line {
+public:
+    double len;
+
+    explicit Line(double l) : len(l){}
+
+    Line operator+(const Line rhs) {
+        return Line(this->len + rhs.len);
+    }
+    Line& operator+= (const Line rhs) {
+        this->len += rhs.len;
+        return *this;
+    }
+    friend Line operator-(Line l1, Line l2);
+
+    friend ostream& operator<<(ostream& lhs, Line& rhs) {
+        lhs << "Line: " << rhs.len;
+        return lhs;
+    }
+};
+
+Line operator-(Line l1, Line l2) {
+    return Line(l1.len - l2.len);
+}
 
 int main() {
+    //region Structs
     Rectangle rect{6, 7};
     Rectangle* rectptr;
     cout << rect.get_area() << endl;
@@ -84,4 +110,31 @@ int main() {
 
     }
     cout << i << endl;
+    //endregion
+    Sphere s0(5);
+    Sphere s1(s0);
+    Sphere s2;
+    s2 = s0;
+    cout << s2.radius << endl;
+
+    Line l1(4);
+    Line l2(6);
+    Line l3 = l1 + l2;
+    l3 += l3;
+    cout << l3 << endl;
+
+    ofstream output;
+    output.open("scores.txt");
+    output << "Dell Savage 99.8" << endl;
+    output.close();
+
+    ifstream input;
+    string fname, lname;
+    double score;
+    string temp;
+    input.open("scores.txt");
+    if (input.fail()) return 12;
+    getline(input, temp);
+    cout << temp << endl;
+    input.close();
 }

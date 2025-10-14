@@ -7,6 +7,7 @@
 class Rectangle {
 public:
     int width, height;
+    //Rectangle() {}
     Rectangle(int width, int height);
     //Rectangle(){width = height = 5;};
     int area() {return width * height;};

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Circle.h"
+#include "Cube.h"
 using namespace std;
 
 enum Days {Mon, Tue, Wed, Thu, Fri};
@@ -29,9 +30,17 @@ struct {
 
 
 
-
+class Line {
+public:
+    double len;
+    Line(double l) : len(l) {}
+    Line operator+(const Line rhs) {
+        return Line(this->len + rhs.len);
+    }
+};
 
 int main() {
+    //region Old
     int x(6);
     Circle circ;
     Rectangle rect{6, 7};
@@ -83,4 +92,9 @@ int main() {
 
     }
     cout << i << endl;
+
+    //endregion
+    Line l1(5);
+    Line l2(9);
+    cout << (l1 + l2).len << endl;
 }
