@@ -1,14 +1,20 @@
 #include <iostream>
 using namespace std;
 
+const int ROWS = 4;
+
+typedef string word;
+enum Days {MON, TUE};
+
 void smoothImg(float *&img) {
-    float newPixels[5];
+    auto *newPixels = new float[5];
 
     for (int i = 0; i < 5; i++) {
         if (i == 0) newPixels[0] = (img[0] + img[1]) / 2;
         if (i == 4) newPixels[4] = (img[4] + img[3]) / 2;
         else newPixels[i] = (img[i] + img[i-1] + img[i+1]) / 3;
     }
+    delete[] img;
     img = newPixels;
 }
 
@@ -35,9 +41,27 @@ int main() {
     cout << image[0] << endl;
     */
 
-    float oPixels[] = {200, 255, 136, 245, 213};
+    float *oPixels = new float[5] {200, 255, 136, 245, 213};
     float *image = oPixels;
     cout << image << endl;
     smoothImg(image);
+    smoothImg(image);
+    smoothImg(image);
+    smoothImg(image);
+    smoothImg(image);
+
+    for (int i = 0; i < 5; i++) {
+        cout << image[i] << " " << endl;
+    }
+
+    cout << &image << endl;
     cout << image << endl;
+
+    int X = 10;
+    const int* pX = &X;
+
+    word w = "This is a word";
+    cout << w << endl;
+
+    Days d = MON;
 }
