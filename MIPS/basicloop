@@ -1,0 +1,41 @@
+.data
+    # No global data needed
+
+.text
+.globl main
+
+main:
+    # Function Prologue (setup stack frame and save registers, typically)
+    # For simplicity, we'll use registers for variables:
+    # $s0 = sum
+    # $s1 = i
+    
+    # 1. Initialization (int sum = 0; int i = 0;)
+    li $s0, 0            # sum = 0
+    li $s1, 0            # i = 0
+    li $t0, 5            # $t0 holds the loop limit (5)
+
+LOOP_START:
+    # 2. Condition Check (i < 5)
+    # The 'slt' (set less than) instruction is common for comparisons.
+    slt $t1, $s1, $t0    # Set $t1 to 1 if i < 5, else 0
+    beq $t1, $zero, LOOP_END # Branch to end if $t1 is 0 (i.e., i >= 5)
+
+    # 3. Loop Body (sum = sum + i;)
+    add $s0, $s0, $s1    # sum = sum + i
+
+    # 4. Increment (++i)
+    addi $s1, $s1, 1     # i = i + 1 (Add Immediate)
+    
+    # 5. Jump back to start
+    j LOOP_START         # Unconditional jump
+
+LOOP_END:
+    # 6. Return sum (MIPS convention is often to put the return value in $v0)
+    move $a0, $s0        # Copy final sum into return register $v0
+    
+    li $v0, 1
+    syscall
+    # Program Exit (simplified)
+    li $v0, 10
+    syscall
