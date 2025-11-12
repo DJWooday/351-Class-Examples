@@ -32,8 +32,12 @@ union weight {
 class Line {
 public:
     double len;
+    static int count;
 
-    explicit Line(double l) : len(l){}
+    explicit Line(double l) {
+
+    len = l;
+    count = count + 1;}
 
     Line operator+(const Line rhs) {
         return Line(this->len + rhs.len);
@@ -48,11 +52,17 @@ public:
         lhs << "Line: " << rhs.len;
         return lhs;
     }
+
+    static void PrintLineLen(int i) {
+        cout << i << endl;
+    }
 };
 
 Line operator-(Line l1, Line l2) {
     return Line(l1.len - l2.len);
 }
+
+
 
 int main() {
     //region Structs
@@ -111,6 +121,8 @@ int main() {
     }
     cout << i << endl;
     //endregion
+
+
     Sphere s0(5);
     Sphere s1(s0);
     Sphere s2;
@@ -121,7 +133,7 @@ int main() {
     Line l2(6);
     Line l3 = l1 + l2;
     l3 += l3;
-    cout << l3 << endl;
+    cout << l3.count << endl;
 
     ofstream output;
     output.open("scores.txt");
