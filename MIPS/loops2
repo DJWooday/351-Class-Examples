@@ -1,0 +1,131 @@
+.data
+save: .word 5 5 5 5 10
+arr: .word 1 2 3 4 5
+
+.text
+.globl main
+main:
+
+
+
+li $s3 5
+li $s4 5
+
+#bge $t0 $s3 ForLoop
+
+li $s0 0
+li $s1 20
+li $s2 5
+
+bne $s3 $s4 Else
+add $s0 $s1 $s2
+j Exit
+
+Else:
+sub $s0 $s1 $s2
+
+Exit:
+
+move $a0 $s0
+li $v0 1
+syscall
+
+# While loop
+# while (save[i] == k)
+li $s3 0
+li $s5 5
+la $s6 save
+
+WhileLoop:
+sll $t1 $s3 2 #temp = i * 4
+add $t1 $t1 $s6 #add temp to address
+lw $t0 0($t1) #save[i]
+
+bne $t0 $s5 WhileLoopExit
+
+# Loop body
+addi $s3 $s3 1
+
+j WhileLoop
+
+WhileLoopExit:
+
+li $a0 32
+li $v0 11
+syscall
+
+move $a0 $t0
+li $v0 1
+syscall
+
+
+
+
+# Summing For Loop
+la $s6 arr
+li $s3 0 #i 
+li $s0 0 #sum
+li $s5 5 #5
+
+ForLoop:
+bge $s3 $s5 ForLoopExit
+#slt $t9 $s3 $s5
+#beq $t9 $zero ForLoopExit
+# beq $s3 $s5 ForLoopExit
+
+
+# ---- arr[i]
+sll $t1 $s3 2
+add $t0 $s6 $t1
+lw $t2 0($t0)
+
+# -- Loop Body
+add $s0 $s0 $t2
+
+# i++ and jump back
+addi $s3 $s3 2
+j ForLoop
+
+ForLoopExit:
+
+li $v0 1
+move $a0 $s0
+syscall
+
+
+
+# Switch Statement
+li $s0 1 # x
+li $s7 0 # j
+
+# Set up cases
+li $t1 1
+li $t2 2
+li $t3 3
+
+beq $s0 $t1 case1
+beq $s0 $t2 case2
+beq $s0 $t3 case3
+j switchEnd
+
+case1:
+li $s7 2
+j switchEnd
+
+case2:
+li $s7 3
+j switchEnd
+
+case3:
+li $s7 4
+j switchEnd
+
+switchEnd:
+
+li $v0 1
+move $a0 $s7
+syscall
+
+
+
+

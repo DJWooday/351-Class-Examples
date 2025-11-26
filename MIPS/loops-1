@@ -1,0 +1,58 @@
+.data
+arr: .word 5 5 5 5 5 5 10
+arrsum: .word 1 2 3 4 5
+
+.text
+.globl main
+
+main:
+li $s3 0
+li $s5 5
+la $s6 arr
+
+Loop:
+sll $t1 $s3 2
+add $t1 $t1 $s6
+lw $t0 0($t1)
+bne $t0 $s5 Exit
+
+#actual loop code
+addi $s3 $s3 1
+
+j Loop
+
+Exit:
+
+move $a0 $t0 
+li $v0 1
+syscall
+
+
+
+li $s0 0 # Sum
+li $s5 5 # Len
+li $s3 0 # i 
+la $s6 arrsum
+
+LoopSum:
+beq $s3 $s5 LoopSumExit
+# Grabbing array number
+sll $t1 $s3 2 #i * 4 for my offset
+add $t1 $t1 $s6 #add offset to addr
+lw $t0 0($t1) #grab from address
+# Adding to sum
+add $s0 $s0 $t0
+# i++
+addi $s3 $s3 1
+j LoopSum
+
+LoopSumExit:
+
+# Print blank space
+li $a0 32
+li $v0 11
+syscall
+
+move $a0 $s0
+li $v0 1
+syscall
